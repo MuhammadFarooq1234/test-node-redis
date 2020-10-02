@@ -5,7 +5,10 @@ const PORT = process.env.PORT || 5000;
 const redis = require("redis");
 const REDIS_URL = process.env.REDIS_URL || 6379;
 const redisClient = redis.createClient(REDIS_URL);
-console.log(redisClient);
+
+redisClient.on("connect", function () {
+  console.log("connected");
+});
 
 express()
   .use(express.static(path.join(__dirname, "public")))
